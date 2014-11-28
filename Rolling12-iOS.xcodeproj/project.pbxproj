@@ -14,6 +14,7 @@
 		4EBE3E0B1A2842E0004ED93B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EBE3E0A1A2842E0004ED93B /* Images.xcassets */; };
 		4EBE3E0E1A2842E0004ED93B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EBE3E0C1A2842E0004ED93B /* LaunchScreen.xib */; };
 		4EBE3E1A1A2842E0004ED93B /* Rolling12_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE3E191A2842E0004ED93B /* Rolling12_iOSTests.swift */; };
+		4ECA8F5D1A28437B009D69B3 /* mapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECA8F5C1A28437B009D69B3 /* mapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		4EBE3E131A2842E0004ED93B /* Rolling12-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rolling12-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EBE3E181A2842E0004ED93B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EBE3E191A2842E0004ED93B /* Rolling12_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rolling12_iOSTests.swift; sourceTree = "<group>"; };
+		4ECA8F5C1A28437B009D69B3 /* mapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				4EBE3E001A2842E0004ED93B /* AppDelegate.swift */,
 				4EBE3E051A2842E0004ED93B /* ViewController.swift */,
 				4EBE3E071A2842E0004ED93B /* Main.storyboard */,
+				4ECA8F5C1A28437B009D69B3 /* mapViewController.swift */,
 				4EBE3E0A1A2842E0004ED93B /* Images.xcassets */,
 				4EBE3E0C1A2842E0004ED93B /* LaunchScreen.xib */,
 				4EBE3E021A2842E0004ED93B /* Rolling12_iOS.xcdatamodeld */,
@@ -218,6 +221,7 @@
 				4EBE3E061A2842E0004ED93B /* ViewController.swift in Sources */,
 				4EBE3E041A2842E0004ED93B /* Rolling12_iOS.xcdatamodeld in Sources */,
 				4EBE3E011A2842E0004ED93B /* AppDelegate.swift in Sources */,
+				4ECA8F5D1A28437B009D69B3 /* mapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +413,7 @@
 				4EBE3E1F1A2842E0004ED93B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4EBE3E201A2842E0004ED93B /* Build configuration list for PBXNativeTarget "Rolling12-iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +422,7 @@
 				4EBE3E221A2842E0004ED93B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
