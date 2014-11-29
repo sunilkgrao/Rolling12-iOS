@@ -17,13 +17,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     @IBOutlet weak var locationTableView: UITableView!
     
     var locations = [NSManagedObject]()
-    var myLocations: [NSManagedObject] = []
+    var myLocations: [CLLocation] = []
     var manager:CLLocationManager!
     
     @IBAction func addLocation(sender: AnyObject) {
         
         manager.startUpdatingLocation()
-        
     }
     
     func locationManager(manager:CLLocationManager, didUpdateLocations locations:[AnyObject]) {
@@ -37,7 +36,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
 
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         title = "Recorded Locations"
         locationTableView.registerClass(UITableViewCell.self,
@@ -64,7 +62,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         location.setValue(c1.longitude, forKey: "longitude")
         location.setValue(c2, forKey: "date")
         
-        
         var error: NSError?
         if !managedContext.save(&error) {
             println("Could not save \(error), \(error?.userInfo)")
@@ -86,10 +83,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             tableView.dequeueReusableCellWithIdentifier("Cell")
                 as UITableViewCell
             
-            let latitude = locations[indexPath.row].getValue("latitude")
-            let longitude = locations[indexPath.row].getValue("longitude")
-            
-            cell.textLabel.text = "Latitude: " + String(format:"%f",latitude) + " Longitude: " + String(format:"%f",longitude)
+            let c1 = myLocations[indexPath.row].coordinate
+            let c2 = myLocations[indexPath.row].timestamp
+            cell.textLabel.text = "Latitude: " + String(format:"%f",c1.latitude) + " Longitude: " + String(format:"%f",c1.longitude)
             return cell
     }
     
@@ -104,25 +100,28 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         let managedContext = appDelegate.managedObjectContext!
         let fetchRequest = NSFetchRequest(entityName:"LocationItem")
         var error: NSError?
-        
         let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
-        
         if let results = fetchedResults {
             locations = results
         } else {
             println("Could not fetch \(error), \(error!.userInfo)")
         }
+        
+        var index = 0
+        var myLocation: CLLocation
+        
+        while index < locations.count {
+            
+            let lat = locations[index].valueForKey("latitude") as Double
+            let long = locations[index].valueForKey("longitude") as Double
+            var mypos: CLLocationCoordinate2D = CLLocationCoordinate2DMake(lat,long)
+            
+            var myLocation: CLLocation = CLLocation(latitude: mypos.latitude,longitude: mypos.longitude)
+            myLocations.append(myLocation)
+            index += 1
+        }
+        
     }
-    
-    lazy var managedObjectContext : NSManagedObjectContext? = {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        if let managedObjectContext = appDelegate.managedObjectContext {
-            return managedObjectContext
-        }
-        else {
-            return nil
-        }
-        }()
 
 }
 
