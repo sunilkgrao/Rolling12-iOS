@@ -12,17 +12,26 @@ import MediaPlayer
 
 class Location: NSObject {
     
-    var title:String
-    var region:CLCircularRegion
-    var media:MPMediaItem
+    var latitude:Double
+    var longitude:Double
+    var uuid:Double
+    var time:datum
     
-    init( title:String, region:CLCircularRegion, media:MPMediaItem ) {
-        self.title = title
-        self.region = region
-        self.media = media
+
+    init( latitude:Double, longitude:Double, uuid:Double, time:datum ) {
+        self.latitude = latitude
+        self.longitude = longitude
+        self.uuid = uuid
+        self.time = time
         
     }
     
-UIDevice.currentDevice().identifierForVendor.UUIDString
+    //NSTimer.scheduledTimerWithTimeInterval(60 * 30, target: self, selector: Selector("handleTimer:"), userInfo: nil, repeats: true)
+    //func handleTimer(timer: NSTimer) {
+        // start location services, here
+        
+        // Remember, have `didUpdateLocations` stop location services
+        // when good location received
+    //}
     
 }

@@ -132,12 +132,13 @@
                     <navigationItem key="navigationItem" id="QpF-1L-Rbv">
                         <nil key="title"/>
                         <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="X9b-Vf-WPN">
-                            <rect key="frame" x="246" y="7" width="108" height="30"/>
+                            <rect key="frame" x="227" y="7" width="147" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Clear Locations">
+                            <state key="normal" title="Add Current Location">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
+                                <action selector="addLocation:" destination="sXQ-t6-YhO" eventType="touchUpInside" id="hy1-zx-esa"/>
                                 <action selector="clearMap:" destination="sXQ-t6-YhO" eventType="touchUpInside" id="wlZ-tg-XlK"/>
                                 <action selector="resetMap:" destination="sXQ-t6-YhO" eventType="touchUpInside" id="44J-Mb-7ct"/>
                             </connections>

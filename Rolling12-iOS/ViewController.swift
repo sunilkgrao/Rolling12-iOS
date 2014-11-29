@@ -8,57 +8,74 @@
 
 import UIKit
 import MapKit
+import CoreLocation
+import CoreData
 
 //Add UITableViewDataSource to class declaration
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     @IBOutlet weak var locationTableView: UITableView!
     
-    //Insert below the tableView IBOutlet
-    var locations = [String]()
+    var locations = [NSManagedObject]()
+    var myLocations: [NSManagedObject] = []
+    var manager:CLLocationManager!
     
     @IBAction func addLocation(sender: AnyObject) {
         
-        var alert = UIAlertController(title: "New Location",
-            message: "Add a new location",
-            preferredStyle: .Alert)
-        
-        let saveAction = UIAlertAction(title: "Save",
-            style: .Default) { (action: UIAlertAction!) -> Void in
-                
-                let textField = alert.textFields![0] as UITextField
-                self.locations.append(textField.text)
-                self.locationTableView.reloadData()
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel",
-            style: .Default) { (action: UIAlertAction!) -> Void in
-        }
-        
-        alert.addTextFieldWithConfigurationHandler {
-            (textField: UITextField!) -> Void in
-        }
-        
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        
-        presentViewController(alert,
-            animated: true,
-            completion: nil)
+        manager.startUpdatingLocation()
         
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "\"The List\""
-        locationTableView.registerClass(UITableViewCell.self,
-            forCellReuseIdentifier: "Cell")
+    func locationManager(manager:CLLocationManager, didUpdateLocations locations:[AnyObject]) {
+        
+        myLocations.append(locations[0] as CLLocation)
+        var sourceIndex = myLocations.count - 1
+        saveLocation(myLocations[sourceIndex])
+        self.locationTableView.reloadData()
+        manager.stopUpdatingLocation()
+        
     }
 
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        title = "Recorded Locations"
+        locationTableView.registerClass(UITableViewCell.self,
+            forCellReuseIdentifier: "Cell")
+        //Setup our Location Manager
+        manager = CLLocationManager()
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.requestAlwaysAuthorization()
+        manager.startMonitoringSignificantLocationChanges()
+        
+    }
+
+    func saveLocation(myLocation: CLLocation) {
+
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        let entity =  NSEntityDescription.entityForName("LocationItem", inManagedObjectContext:managedContext)
+        let location = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
+        
+        let c1 = myLocation.coordinate
+        let c2 = myLocation.timestamp
+        location.setValue(c1.latitude, forKey: "latitude")
+        location.setValue(c1.longitude, forKey: "longitude")
+        location.setValue(c2, forKey: "date")
+        
+        
+        var error: NSError?
+        if !managedContext.save(&error) {
+            println("Could not save \(error), \(error?.userInfo)")
+        }
+        locations.append(location)
+    }
+    
     // MARK: UITableViewDataSource
     func tableView(tableView: UITableView,
         numberOfRowsInSection section: Int) -> Int {
-            return locations.count
+            return myLocations.count
     }
     
     func tableView(tableView: UITableView,
@@ -69,8 +86,10 @@ class ViewController: UIViewController, UITableViewDataSource {
             tableView.dequeueReusableCellWithIdentifier("Cell")
                 as UITableViewCell
             
-            cell.textLabel.text = locations[indexPath.row]
+            let latitude = locations[indexPath.row].getValue("latitude")
+            let longitude = locations[indexPath.row].getValue("longitude")
             
+            cell.textLabel.text = "Latitude: " + String(format:"%f",latitude) + " Longitude: " + String(format:"%f",longitude)
             return cell
     }
     
@@ -79,6 +98,31 @@ class ViewController: UIViewController, UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        let fetchRequest = NSFetchRequest(entityName:"LocationItem")
+        var error: NSError?
+        
+        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
+        
+        if let results = fetchedResults {
+            locations = results
+        } else {
+            println("Could not fetch \(error), \(error!.userInfo)")
+        }
+    }
+    
+    lazy var managedObjectContext : NSManagedObjectContext? = {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let managedObjectContext = appDelegate.managedObjectContext {
+            return managedObjectContext
+        }
+        else {
+            return nil
+        }
+        }()
 
 }
 
