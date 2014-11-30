@@ -26,11 +26,8 @@
                         <rect key="frame" x="20" y="49" width="262" height="43"/>
                     </variation>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="doubleSix.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="b2g-wd-JNk">
-                    <rect key="frame" x="99" y="165" width="282" height="215"/>
-                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="104" y="323" width="159" height="128"/>
-                    </variation>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="doubleSix.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="LlG-ei-OMv">
+                    <rect key="frame" x="120" y="176" width="240" height="183"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -44,7 +41,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="393.5" y="473.5"/>
+            <point key="canvasLocation" x="393" y="473"/>
         </view>
     </objects>
     <resources>

@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import CoreData
+import Alamofire
 
 //Add UITableViewDataSource to class declaration
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
@@ -23,6 +24,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     @IBAction func addLocation(sender: AnyObject) {
         
         manager.startUpdatingLocation()
+    }
+    
+    @IBAction func updateServer(sender: AnyObject) {
+        
+        
     }
     
     func locationManager(manager:CLLocationManager, didUpdateLocations locations:[AnyObject]) {
