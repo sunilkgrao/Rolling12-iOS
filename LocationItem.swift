@@ -14,6 +14,6 @@ class LocationItem: NSManagedObject {
     @NSManaged var latitude: NSNumber
     @NSManaged var longitude: NSNumber
     @NSManaged var date: NSDate
-    @NSManaged var uuid: NSNumber
+    @NSManaged var uuid: NSString
 
 }

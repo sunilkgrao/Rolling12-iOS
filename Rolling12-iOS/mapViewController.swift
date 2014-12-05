@@ -16,7 +16,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     var manager:CLLocationManager!
     var myLocations: [CLLocation] = []
-    
+
     @IBAction func addLocation(sender: AnyObject) {
         
         

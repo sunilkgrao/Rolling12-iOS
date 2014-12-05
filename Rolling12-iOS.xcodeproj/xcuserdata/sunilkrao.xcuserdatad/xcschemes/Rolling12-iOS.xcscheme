@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4EBE3DFA1A2842E0004ED93B"
-               BuildableName = "Rolling12-iOS.app"
+               BuildableName = "Rolling12.app"
                BlueprintName = "Rolling12-iOS"
                ReferencedContainer = "container:Rolling12-iOS.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4EBE3DFA1A2842E0004ED93B"
-            BuildableName = "Rolling12-iOS.app"
+            BuildableName = "Rolling12.app"
             BlueprintName = "Rolling12-iOS"
             ReferencedContainer = "container:Rolling12-iOS.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4EBE3DFA1A2842E0004ED93B"
-            BuildableName = "Rolling12-iOS.app"
+            BuildableName = "Rolling12.app"
             BlueprintName = "Rolling12-iOS"
             ReferencedContainer = "container:Rolling12-iOS.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4EBE3DFA1A2842E0004ED93B"
-            BuildableName = "Rolling12-iOS.app"
+            BuildableName = "Rolling12.app"
             BlueprintName = "Rolling12-iOS"
             ReferencedContainer = "container:Rolling12-iOS.xcodeproj">
          </BuildableReference>

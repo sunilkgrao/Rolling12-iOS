@@ -20,6 +20,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     var locations = [NSManagedObject]()
     var myLocations: [CLLocation] = []
     var manager:CLLocationManager!
+
     
     @IBAction func addLocation(sender: AnyObject) {
         
@@ -29,7 +30,60 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     @IBAction func updateServer(sender: AnyObject) {
         
         
+        // Push all data on local store to helios server
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        let fetchRequest = NSFetchRequest(entityName:"LocationItem")
+        var error: NSError?
+        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
+        if let results = fetchedResults {
+            locations = results
+        } else {
+            println("Could not fetch \(error), \(error!.userInfo)")
+        }
+        
+        var index = 0
+        while index < locations.count {
+            
+            let lat = locations[index].valueForKey("latitude") as Double
+            let long = locations[index].valueForKey("longitude") as Double
+
+            var date = locations[index].valueForKey("date")  as NSDate
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            //var dateString = NSString(format: "", date.timeIntervalSince1970, dateFormatter.stringFromDate(date))
+            let dateString = dateFormatter.stringFromDate(date) as NSString
+            
+            let parameters = [
+                "latitude"  : lat,
+                "longitude" : long,
+                "date"      : dateString,
+                "uuid"      : locations[index].valueForKey("uuid") as NSString
+            ]
+
+            Alamofire.request(.POST, "http://rolling12-server.herokuapp.com/locationitems", parameters: parameters, encoding: .JSON)
+            //responseJSON { (_,_, JSON, _) in
+            //    if let jsonResult = JSON as? Array<Dictionary<String,String>> {
+            //        println(jsonResult)
+            //    }
+            //}
+            index += 1
+        }
+        
+        // Flush local data store
+        index = 0
+        while index < locations.count {
+            managedContext.deleteObject(locations[index] as NSManagedObject)
+            index += 1
+        }
+        // save your changes
+        managedContext.save(nil)
+        myLocations.removeAll()
+        self.locationTableView.reloadData()
+        
     }
+    
+
     
     func locationManager(manager:CLLocationManager, didUpdateLocations locations:[AnyObject]) {
         
@@ -55,6 +109,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
     }
 
+    
+    
     func saveLocation(myLocation: CLLocation) {
 
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -67,6 +123,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         location.setValue(c1.latitude, forKey: "latitude")
         location.setValue(c1.longitude, forKey: "longitude")
         location.setValue(c2, forKey: "date")
+        let uuid = UIDevice.currentDevice().identifierForVendor.UUIDString as NSString
+        location.setValue(uuid, forKey: "uuid")
         
         var error: NSError?
         if !managedContext.save(&error) {
@@ -85,13 +143,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         cellForRowAtIndexPath
         indexPath: NSIndexPath) -> UITableViewCell {
             
-            let cell =
-            tableView.dequeueReusableCellWithIdentifier("Cell")
-                as UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
             
             let c1 = myLocations[indexPath.row].coordinate
             let c2 = myLocations[indexPath.row].timestamp
-            cell.textLabel.text = "Latitude: " + String(format:"%f",c1.latitude) + " Longitude: " + String(format:"%f",c1.longitude)
+            cell.textLabel?.text = "Latitude: " + String(format:"%f",c1.latitude) + " Longitude: " + String(format:"%f",c1.longitude)
             return cell
     }
     
