@@ -2,7 +2,7 @@
 //  LocationItem.swift
 //  Rolling12-iOS
 //
-//  Created by Sunil Rao on 2014-11-28.
+//  Created by Sunil Rao on 2014-12-06.
 //  Copyright (c) 2014 Baryon. All rights reserved.
 //
 
@@ -11,9 +11,9 @@ import CoreData
 
 class LocationItem: NSManagedObject {
 
+    @NSManaged var date: NSDate
     @NSManaged var latitude: NSNumber
     @NSManaged var longitude: NSNumber
-    @NSManaged var date: NSDate
-    @NSManaged var uuid: NSString
+    @NSManaged var uuid: String
 
 }
