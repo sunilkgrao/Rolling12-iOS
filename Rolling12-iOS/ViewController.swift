@@ -31,7 +31,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         
         // Push all data on local store to helios server
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext!
         let fetchRequest = NSFetchRequest(entityName:"LocationItem")
         var error: NSError?
@@ -39,16 +39,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         if let results = fetchedResults {
             locations = results
         } else {
-            println("Could not fetch \(error), \(error!.userInfo)")
+            print("Could not fetch \(error), \(error!.userInfo)")
         }
         
         var index = 0
         while index < locations.count {
             
-            let lat = locations[index].valueForKey("latitude") as Double
-            let long = locations[index].valueForKey("longitude") as Double
+            let lat = locations[index].valueForKey("latitude") as! Double
+            let long = locations[index].valueForKey("longitude") as! Double
 
-            var date = locations[index].valueForKey("date")  as NSDate
+            var date = locations[index].valueForKey("date")  as! NSDate
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             //var dateString = NSString(format: "", date.timeIntervalSince1970, dateFormatter.stringFromDate(date))
@@ -85,10 +85,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
 
     
-    func locationManager(manager:CLLocationManager, didUpdateLocations locations:[AnyObject]) {
+    func locationManager(manager:CLLocationManager, didUpdateLocations locations:[CLLocation]) {
         
         myLocations.append(locations[0] as CLLocation)
-        var sourceIndex = myLocations.count - 1
+        let sourceIndex = myLocations.count - 1
         saveLocation(myLocations[sourceIndex])
         self.locationTableView.reloadData()
         manager.stopUpdatingLocation()
@@ -113,7 +113,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     func saveLocation(myLocation: CLLocation) {
 
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext!
         let entity =  NSEntityDescription.entityForName("LocationItem", inManagedObjectContext:managedContext)
         let location = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
@@ -128,7 +128,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         var error: NSError?
         if !managedContext.save(&error) {
-            println("Could not save \(error), \(error?.userInfo)")
+            print("Could not save \(error), \(error?.userInfo)")
         }
         locations.append(location)
     }
@@ -158,7 +158,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext!
         let fetchRequest = NSFetchRequest(entityName:"LocationItem")
         var error: NSError?
@@ -166,7 +166,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         if let results = fetchedResults {
             locations = results
         } else {
-            println("Could not fetch \(error), \(error!.userInfo)")
+            print("Could not fetch \(error), \(error!.userInfo)")
         }
         
         var index = 0
@@ -174,8 +174,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         while index < locations.count {
             
-            let lat = locations[index].valueForKey("latitude") as Double
-            let long = locations[index].valueForKey("longitude") as Double
+            let lat = locations[index].valueForKey("latitude") as! Double
+            let long = locations[index].valueForKey("longitude") as! Double
             var mypos: CLLocationCoordinate2D = CLLocationCoordinate2DMake(lat,long)
             
             var myLocation: CLLocation = CLLocation(latitude: mypos.latitude,longitude: mypos.longitude)

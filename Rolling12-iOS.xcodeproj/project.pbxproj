@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E806F4B1A29247400043ADE /* LocationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E806F4A1A29247400043ADE /* LocationItem.swift */; };
+		4E504E6A1A33C83F00CBB1E4 /* LocationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E504E691A33C83F00CBB1E4 /* LocationItem.swift */; };
 		4EA6B6401A3159E300B9829E /* seasons.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4EA6B63F1A3159E300B9829E /* seasons.jpeg */; };
 		4EBE3E011A2842E0004ED93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE3E001A2842E0004ED93B /* AppDelegate.swift */; };
 		4EBE3E061A2842E0004ED93B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBE3E051A2842E0004ED93B /* ViewController.swift */; };
@@ -83,7 +83,7 @@
 
 /* Begin PBXFileReference section */
 		4561DBEC110522CD84F90810 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		4E806F4A1A29247400043ADE /* LocationItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationItem.swift; path = ../LocationItem.swift; sourceTree = "<group>"; };
+		4E504E691A33C83F00CBB1E4 /* LocationItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationItem.swift; sourceTree = "<group>"; };
 		4EA6B63F1A3159E300B9829E /* seasons.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = seasons.jpeg; path = "Rolling12-iOS/seasons.jpeg"; sourceTree = "<group>"; };
 		4EBE3DFB1A2842E0004ED93B /* Rolling12.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rolling12.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EBE3DFF1A2842E0004ED93B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -206,7 +206,7 @@
 		4ECA8F5E1A28465F009D69B3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4E806F4A1A29247400043ADE /* LocationItem.swift */,
+				4E504E691A33C83F00CBB1E4 /* LocationItem.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -288,7 +288,9 @@
 		4EBE3DF31A2842E0004ED93B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastSwiftMigration = 0720;
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Baryon;
 				TargetAttributes = {
 					4EBE3DFA1A2842E0004ED93B = {
@@ -410,7 +412,7 @@
 			files = (
 				4EBE3E061A2842E0004ED93B /* ViewController.swift in Sources */,
 				4ECF9A9A1A30173000FCB1BB /* Rolling12_iOS.xcdatamodeld in Sources */,
-				4E806F4B1A29247400043ADE /* LocationItem.swift in Sources */,
+				4E504E6A1A33C83F00CBB1E4 /* LocationItem.swift in Sources */,
 				4EBE3E011A2842E0004ED93B /* AppDelegate.swift in Sources */,
 				4ECA8F5D1A28437B009D69B3 /* mapViewController.swift in Sources */,
 			);
@@ -479,6 +481,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -546,6 +549,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Rolling12-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Baryon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Rolling12;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -561,6 +565,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Rolling12-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Baryon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Rolling12;
 			};
 			name = Release;
@@ -579,6 +584,7 @@
 				);
 				INFOPLIST_FILE = "Rolling12-iOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Baryon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rolling12-iOS.app/Rolling12-iOS";
 			};
@@ -594,6 +600,7 @@
 				);
 				INFOPLIST_FILE = "Rolling12-iOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Baryon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rolling12-iOS.app/Rolling12-iOS";
 			};
